@@ -4,13 +4,11 @@ import { logoutUser } from '../actions/user/userActions';
 import { GoogleLogout } from 'react-google-login';
 
 const Logout: React.FC = () => {
-
   const dispatch = useDispatch()
 
   const handleLogoutSuccess = () => {
     dispatch(logoutUser())
   }
-
 
   return (
     <GoogleLogout
@@ -20,7 +18,5 @@ const Logout: React.FC = () => {
     />
   );
 }
-
-
 
 export default Logout;

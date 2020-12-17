@@ -9,7 +9,6 @@ export const initialUserState: User = {
   imageUrl: ""
 }
 
-
 const userReducer = (state = initialUserState, action: UserActions): User => {
   switch (action.type) {
     case "USER_LOGIN":

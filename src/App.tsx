@@ -10,20 +10,18 @@ const App: React.FC = () => {
   const user = useSelector<AppState, User>(state => state.user)
   console.log(user)
   return (
-    <Body>
+    <Wrapper>
       {!user.googleId
         ? <Login />
         : <Logout />
       }
-    </Body>
+    </Wrapper>
   );
 }
 
-const Body = styled.div`
-  background-color: '#FFF8E5';
-  display: flex; 
-  align-items: center;
-  justify-content: center;
+const Wrapper = styled.div`
+  text-align: center;
+  margin-top: 100px;
 `
 
 export default App;
