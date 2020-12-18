@@ -1,0 +1,60 @@
+import React from "react"
+import { useSelector } from "react-redux"
+import styled from 'styled-components'
+import { AppState } from "../store/configureStore"
+import { User } from "../types/User"
+import Logout from "./Logout"
+
+
+const Header: React.FC = () => {
+  const user = useSelector<AppState, User>(state => state.user)
+
+  return (
+    <HeaderWrapper>
+
+      <UserInfo>
+        <StyledImg src={user.imageUrl} alt="avatar" />
+
+        <div>
+          <UserName>{user.name}</UserName>
+          <UserEmail>{user.email}</UserEmail>
+        </div>
+
+      </UserInfo>
+
+      <Logout />
+    </HeaderWrapper>
+  )
+}
+
+const StyledImg = styled.img`
+  height: 50px;
+  margin-right: 20px;
+  border-radius: 50%;
+`
+const UserInfo = styled.div`
+  text-align: right;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+`
+const UserEmail = styled.div`
+  font-size: 12px;
+`
+const UserName = styled.div`
+  font-size: 18px;
+  margin-bottom: 5px;
+`
+
+const HeaderWrapper = styled.div`
+  width: 100%;
+  height: 80px;
+  padding: 10px 30px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+`
+export default Header

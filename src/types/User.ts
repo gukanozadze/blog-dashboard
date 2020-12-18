@@ -7,7 +7,6 @@ export interface User {
   familyName: string
   name: string
   imageUrl: string,
-  loading: boolean
 }
 
 export const USER_LOGIN = "USER_LOGIN"
@@ -26,6 +25,7 @@ export interface loginUserFailureAction {
 export interface LogoutUserAction {
   type: typeof USER_LOGOUT,
 }
+
 
 export type UserActions = LoginUserAction | LogoutUserAction | loginUserFailureAction
 

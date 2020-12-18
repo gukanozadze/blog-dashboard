@@ -8,6 +8,7 @@ import { AppState } from './store/configureStore';
 import { User } from './types/User';
 // Components
 import Login from './components/Login';
+import Header from './components/Header';
 import Dashboard from './components/Dashboard';
 import Settings from './components/Settings';
 
@@ -28,6 +29,7 @@ const App: React.FC = () => {
     <Wrapper>
       <Router>
         <Switch>
+          <Header />
 
           <Route exact path={["/", "/dashboard"]}>
             <Dashboard />
@@ -44,7 +46,7 @@ const App: React.FC = () => {
 }
 
 const Wrapper = styled.div`
-  margin-top: 100px;
+  /* margin-top: 100px; */
 `
 
 export default App;
