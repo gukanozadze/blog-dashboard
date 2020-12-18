@@ -54,7 +54,7 @@ const Login: React.FC = () => {
       </WelcomeText>
       {error && <ErrorMessage>{error}</ErrorMessage>}
 
-      <Form onSubmit={(e) => e.preventDefault()}>
+      <Form disabled={loading} onSubmit={(e) => e.preventDefault()}>
         <Input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -85,10 +85,12 @@ const Login: React.FC = () => {
     </LoginBody>
   )
 }
-const Form = styled.form`
+const Form = styled.form<{ disabled: boolean }>`
   text-align: center;
   margin-bottom: 50px;
   width: 100%;
+  opacity: ${(p) => (p.disabled ? 0.4 : 1)};
+  cursor: ${(p) => p.disabled && "none"};
 `
 const Input = styled.input`
   display: block;
