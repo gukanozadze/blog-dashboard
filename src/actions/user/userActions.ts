@@ -1,19 +1,15 @@
-import { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
 import firebase from '../../api/firebase'
 import { User, UserActions } from '../../types/User'
 import { Dispatch } from 'redux'
 
 
-
-export const loginFirebaseUser = ({ email, password }: { email: string, password: string }) => {
+export const startLoginFirebaseUser = ({ email, password }: { email: string, password: string }) => {
   return (dispatch: Dispatch<UserActions>) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then(({ user }) => {
         if (user !== null) {
-          const id = user.uid
-          const email = user.email
-          const name = user.displayName
-          dispatch(loginUser({ id, email, name }))
+          // Login
+          dispatch(loginFirebaseUser({ id: user.uid, email: user.email, name: user.displayName }))
         }
       })
       .catch((error) => {
@@ -22,16 +18,13 @@ export const loginFirebaseUser = ({ email, password }: { email: string, password
   }
 }
 
-export const registerFirebaseUser = ({ email, password }: { email: string, password: string }) => {
+export const startRegisterFirebaseUser = ({ email, password }: { email: string, password: string }) => {
   return (dispatch: Dispatch<UserActions>) => {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(({ user }) => {
         if (user) {
-          const id = user.uid
-          const email = user.email
-          const name = user.displayName
-
-          dispatch(loginUser({ id, email, name }))
+          // Login
+          dispatch(loginFirebaseUser({ id: user.uid, email: user.email, name: user.displayName }))
         }
       })
       .catch((error) => {
@@ -39,11 +32,13 @@ export const registerFirebaseUser = ({ email, password }: { email: string, passw
       });
   }
 }
-
+export const loginFirebaseUser = (user: User): UserActions => ({
+  type: "USER_FIREBASE_LOGIN",
+  payload: user
+})
 
 export const loginUser = (user: User): UserActions => {
   localStorage.setItem('userId', user.id);
-
 
   return {
     type: "USER_GOOGLE_LOGIN",

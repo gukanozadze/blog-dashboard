@@ -11,7 +11,13 @@ const Header: React.FC = () => {
   return (
     <HeaderWrapper>
       <UserInfo>
-        <StyledImg src={user.imageUrl} alt="avatar" />
+        <StyledImg
+          src={
+            user.imageUrl ||
+            "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+          }
+          alt="avatar"
+        />
 
         <div>
           <UserName>{user.name}</UserName>

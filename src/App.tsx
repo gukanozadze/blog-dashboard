@@ -3,7 +3,6 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 
 import { useSelector } from "react-redux"
 import styled from "styled-components"
-
 import { AppState } from "./store/configureStore"
 import { User } from "./types/User"
 

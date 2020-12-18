@@ -9,7 +9,6 @@ export interface User {
 
 export const USER_GOOGLE_LOGIN = "USER_GOOGLE_LOGIN"
 export const USER_FIREBASE_LOGIN = "USER_FIREBASE_LOGIN"
-export const USER_FIREBASE_REGISTER = "USER_FIREBASE_REGISTER"
 export const USER_LOGIN_FAILURE = "USER_LOGIN_FAILURE"
 export const USER_LOGOUT = "USER_LOGOUT"
 
@@ -20,12 +19,7 @@ export interface UserGoogleLoginAction {
 
 export interface UserFirebaseLoginAction {
   type: typeof USER_FIREBASE_LOGIN,
-  payload: { email: string, password: string }
-}
-
-export interface UserFirebaseRegisterAction {
-  type: typeof USER_FIREBASE_REGISTER,
-  payload: { email: string, password: string }
+  payload: User
 }
 export interface loginUserFailureAction {
   type: typeof USER_LOGIN_FAILURE,
@@ -37,5 +31,5 @@ export interface LogoutUserAction {
 }
 
 
-export type UserActions = UserGoogleLoginAction | LogoutUserAction | loginUserFailureAction | UserFirebaseLoginAction | UserFirebaseRegisterAction
+export type UserActions = UserGoogleLoginAction | LogoutUserAction | loginUserFailureAction | UserFirebaseLoginAction
 
