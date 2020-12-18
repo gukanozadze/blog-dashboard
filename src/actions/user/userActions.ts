@@ -1,6 +1,4 @@
 import { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
-import { Dispatch } from 'redux'
-import { AppState } from '../../store/configureStore'
 import { UserActions } from '../../types/User'
 
 export const loginUser = (googleResponse: GoogleLoginResponse): UserActions => ({

@@ -7,6 +7,7 @@ export interface User {
   familyName: string
   name: string
   imageUrl: string,
+  loading: boolean
 }
 
 export const USER_LOGIN = "USER_LOGIN"

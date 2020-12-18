@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/user-event'
 import { createStore, compose, combineReducers, applyMiddleware } from 'redux'
 import thunk, { ThunkMiddleware } from 'redux-thunk'
 import userReducer from '../actions/user/userReducer'
@@ -10,11 +9,8 @@ export const rootReducer = combineReducers({
 
 export type AppState = ReturnType<typeof rootReducer>
 
-declare global {
-  interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
-  }
-}
+// For Redux Devtools 
+declare global { interface Window { __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose; } }
 const composeEnhancers = window['__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] as typeof compose || compose;
 
 

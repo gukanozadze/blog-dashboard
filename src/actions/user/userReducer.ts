@@ -6,7 +6,8 @@ export const initialUserState: User = {
   givenName: "",
   familyName: "",
   name: "",
-  imageUrl: ""
+  imageUrl: "",
+  loading: true
 }
 
 const userReducer = (state = initialUserState, action: UserActions): User => {
@@ -14,7 +15,7 @@ const userReducer = (state = initialUserState, action: UserActions): User => {
     case "USER_LOGIN":
       return { ...state, ...action.payload }
     case "USER_LOGOUT":
-      return { ...state, ...initialUserState }
+      return { ...state, ...initialUserState, loading: false }
     default:
       return state
   }

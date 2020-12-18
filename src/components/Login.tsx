@@ -1,10 +1,16 @@
 import React from 'react';
 import styled from 'styled-components'
-import { useDispatch } from 'react-redux';
+import ClipLoader from "react-spinners/ClipLoader";
+
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, loginUserFailure } from '../actions/user/userActions';
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login';
+import { AppState } from '../store/configureStore';
+import { User } from '../types/User';
 
 const Login: React.FC = () => {
+  const user = useSelector<AppState, User>(state => state.user)
+
   const dispatch = useDispatch()
 
   const handleLoginSuccess = (googleResponse: GoogleLoginResponse | GoogleLoginResponseOffline) => {
@@ -15,14 +21,23 @@ const Login: React.FC = () => {
     dispatch(loginUserFailure(response))
   }
 
+
   return (
     <LoginBody>
+      <ClipLoader
+        size={110}
+
+        color="#00BFFF"
+        loading={user.loading}
+      />
+
       <WelcomeText>Sign In</WelcomeText>
       <GoogleLogin
         clientId="193863253314-9q5fmvs0hblg76dt28k0efn5iu6b2qgi.apps.googleusercontent.com"
         buttonText="Enter with Google"
         onSuccess={handleLoginSuccess}
         onFailure={handleLoginFailure}
+        onRequest={() => console.log("tle")}
         cookiePolicy={'single_host_origin'}
         isSignedIn={true} // This will save the user if we refresh the page
       />
