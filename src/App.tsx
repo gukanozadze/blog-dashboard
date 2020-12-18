@@ -6,6 +6,9 @@ import styled from 'styled-components'
 
 import { AppState } from './store/configureStore';
 import { User } from './types/User';
+
+import Navbar from './layouts/Navbar'
+
 // Components
 import Login from './components/Login';
 import Header from './components/Header';
@@ -27,18 +30,29 @@ const App: React.FC = () => {
 
   return (
     <Wrapper>
+
+
       <Router>
         <Switch>
-          <Header />
+          <React.Fragment>
 
-          <Route exact path={["/", "/dashboard"]}>
-            <Dashboard />
-          </Route>
+            <div>
+              <Header />
+            </div>
 
-          <Route exact path="/Settings">
-            <Settings />
-          </Route>
+            <Route exact path={["/", "/dashboard"]}>
+              <Navbar>
+                <Dashboard />
+              </Navbar>
+            </Route>
 
+            <Route exact path="/Settings">
+              <Navbar>
+                <Settings />
+              </Navbar>
+            </Route>
+
+          </React.Fragment>
         </Switch>
       </Router>
     </Wrapper>

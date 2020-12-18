@@ -47,6 +47,7 @@ const UserName = styled.div`
 `
 
 const HeaderWrapper = styled.div`
+  position: relative;
   width: 100%;
   height: 80px;
   padding: 10px 30px;
