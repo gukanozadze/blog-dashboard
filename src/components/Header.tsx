@@ -1,17 +1,15 @@
 import React from "react"
 import { useSelector } from "react-redux"
-import styled from 'styled-components'
+import styled from "styled-components"
 import { AppState } from "../store/configureStore"
 import { User } from "../types/User"
 import Logout from "./Logout"
 
-
 const Header: React.FC = () => {
-  const user = useSelector<AppState, User>(state => state.user)
+  const user = useSelector<AppState, User>((state) => state.user.data)
 
   return (
     <HeaderWrapper>
-
       <UserInfo>
         <StyledImg src={user.imageUrl} alt="avatar" />
 
@@ -19,7 +17,6 @@ const Header: React.FC = () => {
           <UserName>{user.name}</UserName>
           <UserEmail>{user.email}</UserEmail>
         </div>
-
       </UserInfo>
 
       <Logout />
@@ -52,10 +49,9 @@ const HeaderWrapper = styled.div`
   height: 80px;
   padding: 10px 30px;
   background: white;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   display: flex;
   align-items: center;
   justify-content: flex-end;
-
 `
 export default Header
