@@ -12,6 +12,7 @@ export interface BlogFormData {
 }
 
 export const CREATE_BLOG = "CREATE_BLOG"
+export const DELETE_BLOG = "DELETE_BLOG"
 export const GET_BLOGS = "GET_BLOGS"
 export const BLOG_FAILURE = "BLOG_FAILURE"
 export const CLEAR_BLOGS = "CLEAR_BLOGS"
@@ -20,6 +21,10 @@ export const CLEAR_BLOGS = "CLEAR_BLOGS"
 export interface CreateBlogAction {
   type: typeof CREATE_BLOG,
   payload: Blog
+}
+export interface DeleteBlogAction {
+  type: typeof DELETE_BLOG,
+  payload: Blog[]
 }
 export interface GetBlogsAction {
   type: typeof GET_BLOGS,
@@ -35,4 +40,4 @@ export interface BlogClearAction {
   type: typeof CLEAR_BLOGS,
 }
 
-export type BlogActions = CreateBlogAction | BlogFailureAction | GetBlogsAction | BlogClearAction
+export type BlogActions = CreateBlogAction | BlogFailureAction | GetBlogsAction | BlogClearAction | DeleteBlogAction
