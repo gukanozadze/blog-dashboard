@@ -26,7 +26,7 @@ const Blogs: React.FC = () => {
         blogs.map(({ id, title, description, imageUrl }) => (
           <BlogContainer key={id}>
             <img
-              width="200"
+              width="100%"
               alt={`blog ${title}`}
               src={
                 imageUrl ||
@@ -63,20 +63,23 @@ const BlogsLayout = styled.div`
 const Title = styled.div`
   margin: 10px 0;
   font-size: 25px;
+  word-break: break-all;
 `
 
 const Description = styled.div`
   color: rgba(0, 0, 0, 0.7);
   font-size: 18px;
+  word-break: break-all;
 `
 const BlogContainer = styled.div`
+  max-width: 300px;
   position: relative;
   margin-right: 40px;
   margin-bottom: 30px;
   border-radius: 15px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  padding: 20px 40px;
+  padding: 20px 30px;
   &:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15), 0 10px 10px rgba(0, 0, 0, 0.12);
   }
