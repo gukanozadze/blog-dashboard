@@ -5,12 +5,12 @@ interface BlogState {
   error: string
 }
 
-export const initialUserState: BlogState = {
+export const initialBlogState: BlogState = {
   data: [],
   error: ""
 }
 
-const blogReducer = (state = initialUserState, action: BlogActions): BlogState => {
+const blogReducer = (state = initialBlogState, action: BlogActions): BlogState => {
   switch (action.type) {
     case "CREATE_BLOG":
       return { ...state, data: [...state.data, action.payload], error: "" }
@@ -18,6 +18,8 @@ const blogReducer = (state = initialUserState, action: BlogActions): BlogState =
       return { ...state, data: action.payload }
     case "BLOG_FAILURE":
       return { ...state, error: action.payload }
+    case "CLEAR_BLOGS":
+      return initialBlogState
     default:
       return state
   }

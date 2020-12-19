@@ -1,7 +1,8 @@
 import React, { useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import { startCreateBlog } from "../../actions/blog/blogActions"
+import { AppState } from "../../store/configureStore"
 
 const BlogForm: React.FC = () => {
   const dispatch = useDispatch()
@@ -9,6 +10,7 @@ const BlogForm: React.FC = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [imageUrl, setImageUrl] = useState("")
+  const userId = useSelector<AppState, string>((state) => state.user.data.id)
 
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -19,11 +21,14 @@ const BlogForm: React.FC = () => {
     setImageUrl("")
 
     dispatch(
-      startCreateBlog({
-        title,
-        description,
-        imageUrl,
-      })
+      startCreateBlog(
+        {
+          title,
+          description,
+          imageUrl,
+        },
+        userId
+      )
     )
   }
   return (

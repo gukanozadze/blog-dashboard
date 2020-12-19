@@ -1,13 +1,15 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { logoutUser } from '../actions/user/userActions';
-import { GoogleLogout } from 'react-google-login';
+import React from "react"
+import { useDispatch } from "react-redux"
+import { logoutUser } from "../actions/user/userActions"
+import { clearBlogs } from "../actions/blog/blogActions"
+import { GoogleLogout } from "react-google-login"
 
 const Logout: React.FC = () => {
   const dispatch = useDispatch()
 
   const handleLogoutSuccess = () => {
     dispatch(logoutUser())
+    dispatch(clearBlogs())
   }
 
   return (
@@ -16,7 +18,7 @@ const Logout: React.FC = () => {
       buttonText="Logout"
       onLogoutSuccess={handleLogoutSuccess}
     />
-  );
+  )
 }
 
-export default Logout;
+export default Logout
