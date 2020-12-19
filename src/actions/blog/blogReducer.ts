@@ -6,9 +6,7 @@ interface BlogState {
 }
 
 export const initialUserState: BlogState = {
-  data: [
-    { id: "muteli", title: "Yle", description: "description" }
-  ],
+  data: [],
   error: ""
 }
 
@@ -16,6 +14,8 @@ const blogReducer = (state = initialUserState, action: BlogActions): BlogState =
   switch (action.type) {
     case "CREATE_BLOG":
       return { ...state, data: [...state.data, action.payload], error: "" }
+    case "GET_BLOGS":
+      return { ...state, data: action.payload }
     case "BLOG_FAILURE":
       return { ...state, error: action.payload }
     default:

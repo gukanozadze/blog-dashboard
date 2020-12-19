@@ -10,7 +10,14 @@ const BlogForm: React.FC = () => {
   const [description, setDescription] = useState("")
   const [imageUrl, setImageUrl] = useState("")
 
-  const handleOnSubmit = () => {
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    // Clearing Form
+    setTitle("")
+    setDescription("")
+    setImageUrl("")
+
     dispatch(
       startCreateBlog({
         title,
@@ -25,15 +32,32 @@ const BlogForm: React.FC = () => {
       <StyledForm onSubmit={handleOnSubmit}>
         <div>
           <StyledLabel>Title</StyledLabel>
-          <StyledInput type="text" placeholder="title" />
+          <StyledInput
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            type="text"
+            required={true}
+            placeholder="title"
+          />
         </div>
         <div>
           <StyledLabel>Description</StyledLabel>
-          <StyledInput type="text" placeholder="description" />
+          <StyledInput
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            type="text"
+            required={true}
+            placeholder="description"
+          />
         </div>
         <div>
           <StyledLabel>Image Url (Optional)</StyledLabel>
-          <StyledInput type="text" placeholder="Image Url (Optional)" />
+          <StyledInput
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+            type="url"
+            placeholder="Image Url (Optional)"
+          />
         </div>
         <StyledButton type="submit">Create</StyledButton>
       </StyledForm>
@@ -75,7 +99,7 @@ const StyledP = styled.p`
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
-  margin-right: 100px;
+  margin-right: 150px;
 `
 
 export default BlogForm
