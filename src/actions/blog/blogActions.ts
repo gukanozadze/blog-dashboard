@@ -6,10 +6,10 @@ import { Blog, BlogFormData, BlogActions } from '../../types/Blog'
 
 
 
-export const startGetBlogs = () => {
+export const startGetBlogs = (userId: string) => {
   return async (dispatch: Dispatch<BlogActions>) => {
     try {
-      const response = await api.getBlogs()
+      const response = await api.getBlogs(userId)
       dispatch(getBlogs(response.data))
     } catch (err) {
       if (err.response) {
@@ -21,10 +21,10 @@ export const startGetBlogs = () => {
   }
 }
 
-export const startCreateBlog = (blogData: BlogFormData) => {
+export const startCreateBlog = (blogData: BlogFormData, userId: string) => {
   return async (dispatch: Dispatch<BlogActions>) => {
     try {
-      const response = await api.createBlog(blogData)
+      const response = await api.createBlog(blogData, userId)
       dispatch(createBlog(response.data))
     } catch (err) {
       if (err.response) {
@@ -49,4 +49,8 @@ export const createBlog = (blog: Blog): BlogActions => ({
 export const blogFailure = (message: string): BlogActions => ({
   type: "BLOG_FAILURE",
   payload: message
+})
+
+export const clearBlogs = (): BlogActions => ({
+  type: "CLEAR_BLOGS"
 })

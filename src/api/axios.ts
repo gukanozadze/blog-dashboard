@@ -21,7 +21,7 @@ export const logiUser = (userLoginData: UserLoginData) => api.post(`/user/login`
 export const logiUserId = (id: string) => api.post(`/user/login-id`, { id })
 
 
-export const createBlog = (blogData: BlogFormData) => api.post(`/blog`, blogData)
-export const getBlogs = () => api.get(`/blog`)
+export const createBlog = (blogData: BlogFormData, userId: string) => api.post(`/blog`, { blogData, userId })
+export const getBlogs = (userId: string) => api.get(`/blog/${userId}`)
 export const deleteBlog = (blogId: string) => api.delete(`/blog/${blogId}`)
 export const updateBlog = (blogId: string, blogData: BlogFormData) => api.patch(`/blog/${blogId}`, blogData)

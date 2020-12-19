@@ -39,7 +39,7 @@ const Login: React.FC = () => {
       <ClipLoader size={110} color="#00BFFF" loading={loading} />
       {/* style prop - Just to dim this text a bit when loading */}
       <WelcomeText style={{ opacity: loading ? 0.3 : 1 }}>
-        Enter With Firebase
+        Login - NestJS API
       </WelcomeText>
       {error && <ErrorMessage>{error}</ErrorMessage>}
 

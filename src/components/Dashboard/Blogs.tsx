@@ -8,15 +8,16 @@ import { startGetBlogs } from "../../actions/blog/blogActions"
 
 const Blogs: React.FC = () => {
   const blogs = useSelector<AppState, BlogType[]>((state) => state.blog.data)
+  const userId = useSelector<AppState, string>((state) => state.user.data.id)
   const dispatch = useDispatch()
-  console.log(blogs)
 
   useEffect(() => {
     if (blogs.length === 0) {
-      dispatch(startGetBlogs())
+      console.log("ylylylyellyelye")
+      dispatch(startGetBlogs(userId))
     }
-  }, [blogs])
-  console.log(blogs)
+  }, [""])
+
   return (
     <BlogsLayout>
       {blogs.length !== 0 &&
