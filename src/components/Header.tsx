@@ -20,7 +20,6 @@ const Header: React.FC = () => {
         />
 
         <div>
-          <UserName>{user.name}</UserName>
           <UserEmail>{user.email}</UserEmail>
         </div>
       </UserInfo>
@@ -43,10 +42,6 @@ const UserInfo = styled.div`
 `
 const UserEmail = styled.div`
   font-size: 12px;
-`
-const UserName = styled.div`
-  font-size: 18px;
-  margin-bottom: 5px;
 `
 
 const HeaderWrapper = styled.div`

@@ -9,8 +9,7 @@ const Settings: React.FC = () => {
   return (
     <div>
       Secret Settings
-      <div>Family Name: {user.name}</div>
-      <div>GoogleId: {user.id}</div>
+      <div>userID: {user.id}</div>
     </div>
   )
 }

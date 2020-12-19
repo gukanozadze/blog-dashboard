@@ -11,7 +11,7 @@ import Navbar from "./layouts/Navbar"
 // Components
 import Login from "./components/Login"
 import Header from "./components/Header"
-import Dashboard from "./components/Dashboard"
+import Dashboard from "./components/Dashboard/Dashboard"
 import Settings from "./components/Settings"
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
