@@ -4,45 +4,34 @@ import ClipLoader from "react-spinners/ClipLoader"
 
 import { useDispatch, useSelector } from "react-redux"
 import {
-  startLoginFirebaseUser,
-  startRegisterFirebaseUser,
-  loginUser,
-  loginUserFailure,
+  startLoginUser,
+  startRegisterUser,
+  startLoginUserWithId,
 } from "../actions/user/userActions"
-import GoogleLogin, {
-  GoogleLoginResponse,
-  GoogleLoginResponseOffline,
-} from "react-google-login"
+
 import { AppState } from "../store/configureStore"
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const error = useSelector<AppState, string>((state) => state.user.error)
-
   const dispatch = useDispatch()
-
+  const error = useSelector<AppState, string>((state) => state.user.error)
   const loading = localStorage.getItem("userId") ? true : false
 
-  const handleLoginSuccess = (
-    googleResponse: GoogleLoginResponse | GoogleLoginResponseOffline
-  ) => {
-    const googleLoginResponse = googleResponse as GoogleLoginResponse
-    const profileObj = googleLoginResponse.profileObj
+  useEffect(() => {
+    const userId = localStorage.getItem("userId")
 
-    const { googleId: id, name, email, imageUrl } = profileObj
+    // Check if we have saved user in localstorage
+    if (loading && typeof userId !== "undefined" && userId !== null) {
+      dispatch(startLoginUserWithId(userId))
+    }
+  }, []) // We want this useEffect to run only once
 
-    dispatch(loginUser({ id, name, email, imageUrl }))
+  const handleRegister = () => {
+    dispatch(startRegisterUser({ email, password }))
   }
-  const handleLoginFailure = (response: any) => {
-    dispatch(loginUserFailure(response.error))
-  }
-
-  const handleFirebaseRegister = () => {
-    dispatch(startRegisterFirebaseUser({ email, password }))
-  }
-  const handleFirebaseLogin = () => {
-    dispatch(startLoginFirebaseUser({ email, password }))
+  const handleLogin = () => {
+    dispatch(startLoginUser({ email, password }))
   }
 
   return (
@@ -67,21 +56,9 @@ const Login: React.FC = () => {
           type="password"
           placeholder="Enter Password"
         />
-        <Button onClick={handleFirebaseRegister}>Register</Button>
-        <Button onClick={handleFirebaseLogin}>Login</Button>
+        <Button onClick={handleRegister}>Register</Button>
+        <Button onClick={handleLogin}>Login</Button>
       </Form>
-      <div>
-        <h4>Sign in with google to stay loged in </h4>
-        <GoogleLogin
-          clientId="193863253314-9q5fmvs0hblg76dt28k0efn5iu6b2qgi.apps.googleusercontent.com"
-          buttonText="Enter with Google"
-          onSuccess={handleLoginSuccess}
-          onFailure={handleLoginFailure}
-          cookiePolicy={"single_host_origin"}
-          disabled={loading}
-          isSignedIn={true} // This will save the user if we refresh the page
-        />
-      </div>
     </LoginBody>
   )
 }

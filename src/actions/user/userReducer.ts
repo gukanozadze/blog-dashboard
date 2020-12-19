@@ -9,7 +9,6 @@ export const initialUserState: UserState = {
   data: {
     id: "",
     email: "",
-    name: "",
     imageUrl: "",
   },
   error: ""
@@ -17,9 +16,7 @@ export const initialUserState: UserState = {
 
 const userReducer = (state = initialUserState, action: UserActions): UserState => {
   switch (action.type) {
-    case "USER_GOOGLE_LOGIN":
-      return { ...state, data: { ...action.payload } }
-    case "USER_FIREBASE_LOGIN":
+    case "USER_LOGIN":
       return { ...state, data: { ...action.payload } }
     case "USER_LOGOUT":
       return { ...state, ...initialUserState }

@@ -1,47 +1,48 @@
-import firebase from '../../api/firebase'
 import { User, UserActions } from '../../types/User'
 import { Dispatch } from 'redux'
+import * as api from '../../api/axios'
 
-
-export const startLoginFirebaseUser = ({ email, password }: { email: string, password: string }) => {
-  return (dispatch: Dispatch<UserActions>) => {
-    firebase.auth().signInWithEmailAndPassword(email, password)
-      .then(({ user }) => {
-        if (user !== null) {
-          // Login
-          dispatch(loginFirebaseUser({ id: user.uid, email: user.email, name: user.displayName }))
-        }
-      })
-      .catch((error) => {
-        dispatch(loginUserFailure(error.message))
-      });
+export const startLoginUserWithId = (id: string) => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      const response = await api.logiUserId(id)
+      dispatch(loginUser(response.data))
+    } catch (err) {
+      const errorMessage = err.response.data.message
+      dispatch(loginUserFailure(errorMessage))
+    }
   }
 }
 
-export const startRegisterFirebaseUser = ({ email, password }: { email: string, password: string }) => {
-  return (dispatch: Dispatch<UserActions>) => {
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(({ user }) => {
-        if (user) {
-          // Login
-          dispatch(loginFirebaseUser({ id: user.uid, email: user.email, name: user.displayName }))
-        }
-      })
-      .catch((error) => {
-        dispatch(loginUserFailure(error.message))
-      });
+export const startLoginUser = ({ email, password }: { email: string, password: string }) => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      const response = await api.logiUser({ email, password })
+      dispatch(loginUser(response.data))
+    } catch (err) {
+      const errorMessage = err.response.data.message
+      dispatch(loginUserFailure(errorMessage))
+    }
   }
 }
-export const loginFirebaseUser = (user: User): UserActions => ({
-  type: "USER_FIREBASE_LOGIN",
-  payload: user
-})
+export const startRegisterUser = ({ email, password }: { email: string, password: string }) => {
+  return async (dispatch: Dispatch<UserActions>) => {
+    try {
+      const response = await api.registerUser({ email, password })
+      dispatch(loginUser(response.data))
+
+    } catch (err) {
+      const errorMessage = err.response.data.message
+      dispatch(loginUserFailure(errorMessage))
+    }
+  }
+}
 
 export const loginUser = (user: User): UserActions => {
   localStorage.setItem('userId', user.id);
 
   return {
-    type: "USER_GOOGLE_LOGIN",
+    type: "USER_LOGIN",
     payload: user
   }
 }
