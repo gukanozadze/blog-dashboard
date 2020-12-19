@@ -75,6 +75,7 @@ const StyledP = styled.p`
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  margin-right: 100px;
 `
 
 export default BlogForm

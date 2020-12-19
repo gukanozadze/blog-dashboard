@@ -6,7 +6,9 @@ interface BlogState {
 }
 
 export const initialUserState: BlogState = {
-  data: [],
+  data: [
+    { id: "muteli", title: "Yle", description: "description" }
+  ],
   error: ""
 }
 
